@@ -1,5 +1,6 @@
 import requests
 import json
+import subprocess
 
 
 def getWeatherData():
@@ -10,7 +11,7 @@ def getWeatherData():
     keywords = ["storm", "rain"]
 
     if any([x in todayForecast for x in keywords]):
-        print("rain")
+        raining = subprocess.run(['notify-send', 'Weather Alert', 'It will rain today'], check=True, text=True)
     else:
         print("clear")
 
