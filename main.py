@@ -16,13 +16,12 @@ def getWeatherData(url):
     todayPrecipChance = r["properties"]["periods"][0]["probabilityOfPrecipitation"]["value"]
     todayLow = r["properties"]["periods"][1]["temperature"]
     todayHigh = r["properties"]["periods"][0]["temperature"]
-    keywords = ["storm", "rain"]
+    keywords = ["storm", "rain", "sleet", "snow", "tornado", "hurricane"]
 
     message = "Low: " + str(todayLow) + ", High: " + str(todayHigh)
     if any([x in todayForecast for x in keywords]) and todayPrecipChance != None and todayPrecipChance >= 40:
-        message += ", Rain expected"
+        message += ", Storms expected"
     
-    print("wow")
     subprocess.run(['notify-send', '-i', '/home/zhenloopy/tinyWeather/weathericon.png', 'Weather Alert', message, '-u', 'critical'], check=True, text=True)
 
 url = getURL()
