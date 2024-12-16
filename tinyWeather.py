@@ -6,7 +6,6 @@ def getURL():
     ip = requests.get("http://ip-api.com/json/?fields=lat,lon").json()
     url = requests.get("https://api.weather.gov/points/" + str(ip["lat"]) + "," + str(ip["lon"])).json()["properties"]["forecast"]
     print(url)
-    return url
     
 
 def getWeatherData(url):
