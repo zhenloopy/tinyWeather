@@ -22,7 +22,8 @@ def getWeatherData(url):
     if any([x in todayForecast for x in keywords]) and todayPrecipChance != None and todayPrecipChance >= 40:
         message += ", Storms expected"
     
-    subprocess.run(['notify-send', '-i', '/home/zhenloopy/tinyWeather/weathericon.png', 'Weather Alert', message, '-u', 'critical'], check=True, text=True)
+    subprocess.run(['env', 'DISPLAY=:0', 'notify-send', '-i', '/home/zhenloopy/tinyWeather/weathericon.png', 'Weather Alert', message, '-u', 'critical'], check=False, text=True)
+
 
 url = getURL()
 getWeatherData(url)
