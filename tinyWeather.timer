@@ -1,0 +1,10 @@
+[Unit]
+Description=Daily weather alerts
+
+[Timer]
+OnCalendar=daily
+AccuracySec=23h
+Persistent=true
+
+[Install]
+WantedBy=default.target
