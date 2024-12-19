@@ -1,6 +1,9 @@
 #!/usr/bin/env python3
 import requests
-import subprocess
+import os
+from shlex import split
+from subprocess import run
+
 
 
 def getURL():
@@ -18,12 +21,19 @@ def getWeatherData(url):
     todayHigh = r["properties"]["periods"][0]["temperature"]
     keywords = ["storm", "rain", "sleet", "snow", "tornado", "hurricane"]
 
-    message = "Low: " + str(todayLow) + ", High: " + str(todayHigh)
+    message = "\"Low: " + str(todayLow) + ", High: " + str(todayHigh)
     if any([x in todayForecast for x in keywords]) and todayPrecipChance != None and todayPrecipChance >= 40:
         message += ", Storms expected"
-    
-    subprocess.run(['env', 'DISPLAY=:0', 'notify-send', '-i', '/home/zhenloopy/tinyWeather/weathericon.png', 'Weather Alert', message, '-u', 'critical'], check=False, text=True)
+    message += "\""
 
+    with open('direct.temp', "w") as outfile:
+        run(["readlink", "-f", "tinyWeatherDirectory"], stdout=outfile)
+
+    with open('direct.temp', "r") as infile:
+        fullPath = infile.readline().strip('\n')
+    run(split("env DISPLAY=:0 notify-send -i " + fullPath + "/weathericon.png \"Weather Alert\" " + message + " -u critical"), check=False, text=True)
+
+    os.remove('direct.temp')
 
 url = getURL()
 getWeatherData(url)
