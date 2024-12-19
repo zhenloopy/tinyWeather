@@ -6,6 +6,7 @@ then
 	fi
 	mv -t /usr/local/bin tinyWeather.py tinyWeatherDirectory
 	sudo mv -t /etc/systemd/user/ tinyWeather.service tinyWeather.timer
+	systemctl --user enable tinyWeather.service
 	systemctl --user daemon-reload && systemctl --user start tinyWeather.timer
 
 else
