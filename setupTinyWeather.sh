@@ -1,8 +1,13 @@
 if [ -f tinyWeather.py ]
 then
-	mv tinyWeather.py /usr/local/bin && chmod -x /usr/local/bin/tinyWeather.py
+	if ! [ -d tinyWeatherDirectory ] 
+	then
+		ln -s "$(pwd)" tinyWeatherDirectory
+	fi
+	mv -t /usr/local/bin tinyWeather.py tinyWeatherDirectory
 	sudo mv -t /etc/systemd/user/ tinyWeather.service tinyWeather.timer
 	systemctl --user daemon-reload && systemctl --user start tinyWeather.timer
+
 else
 	echo "You already setup tinyWeather. Do you want to
 a) change configuration
@@ -12,15 +17,17 @@ Enter a, b, or anything else to exit."
 	if [ "$setupChoice" = "a" ]
 	then
 		echo "TODO: SETUP CONFIG CHANGE"
+
 	elif [ "$setupChoice" = "b" ]
 	then
-		mv /usr/local/bin/tinyWeather.py .
 		sudo mv /etc/systemd/user/tinyWeather* .
+		mv -t . /usr/local/bin/tinyWeather.py /usr/local/bin/tinyWeatherDirectory
 		systemctl --user daemon-reload
 		echo "Systemd service and timer stopped. Do you want to remove tinyWeather completely? (y/n)"
-		read deleteChoice
+		read -r deleteChoice
 		if [ "$deleteChoice" = "y" ]; then cd ..; rm -rf -- tinyWeather/
 		fi
+
 	else
 		echo "Setup cancelled."
 	fi
