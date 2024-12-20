@@ -3,7 +3,7 @@ tinyWeather is designed to be a lightweight weather app for Linux. It is extreme
 - Use your IP address to find your approximate location and call the NWS API
 - Show a popup notification telling you the high and low temperatures for today, as well as the presence of storms including rain, snow, tornados, and hurricanes
 - Can be configured to use any icon for the notification by replacing the image currently in the directory (has to be the same name!)
-- Systemd timer is set up to run once a day at midnight (this is why sudo is required)
+- Systemd timer is set up to run on boot and once a day at midnight (this is why sudo is required)
 - Setup script both automates setting up, stopping, and removing the program
 
 Planned functionality:
