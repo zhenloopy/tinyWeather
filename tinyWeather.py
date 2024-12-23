@@ -2,7 +2,7 @@
 import requests
 import os
 from shlex import split
-from subprocess import run
+from subprocess import run, PIPE, check_output
 
 
 
@@ -31,7 +31,13 @@ def getWeatherData(url):
 
     with open('direct.temp', "r") as infile:
         fullPath = infile.readline().strip('\n')
-    run(split("env DISPLAY=:0 notify-send -i " + fullPath + "/weathericon.png \"Weather Alert\" " + message + " -u critical"), check=False, text=True)
+
+    desktopOutput = os.environ.get('DESKTOP_SESSION')
+    print(desktopOutput)
+    if (desktopOutput != "None"):
+        run(split("env DISPLAY=:0 notify-send -i " + fullPath + "/weathericon.png \"Weather Alert\" " + message + " -u critical"), check=False, text=True)
+    else:
+        print("Weather Alert" + message)
 
     os.remove('direct.temp')
 
