@@ -4,7 +4,7 @@ then
 	then
 		ln -s "$(pwd)" tinyWeatherDirectory
 	fi
-	mv -t /usr/local/bin tinyWeather.py tinyWeatherDirectory
+	sudo mv -t /usr/local/bin tinyWeather.py tinyWeatherDirectory
 	sudo mv -t /etc/systemd/user/ tinyWeather.service tinyWeather.timer
 	systemctl --user enable tinyWeather.service
 	systemctl --user daemon-reload && systemctl --user start tinyWeather.timer
@@ -22,11 +22,11 @@ Enter a, b, or anything else to exit."
 	elif [ "$setupChoice" = "b" ]
 	then
 		sudo mv /etc/systemd/user/tinyWeather* .
-		mv -t . /usr/local/bin/tinyWeather.py /usr/local/bin/tinyWeatherDirectory
+		sudo mv -t . /usr/local/bin/tinyWeather.py /usr/local/bin/tinyWeatherDirectory
 		systemctl --user daemon-reload
 		echo "Systemd service and timer stopped. Do you want to remove tinyWeather completely? (y/n)"
 		read -r deleteChoice
-		if [ "$deleteChoice" = "y" ]; then cd ..; rm -rf -- tinyWeather/
+		if [ "$deleteChoice" = "y" ]; then cd ../; rm -rf -- tinyWeather/
 		fi
 
 	else
