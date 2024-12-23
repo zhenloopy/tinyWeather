@@ -7,13 +7,12 @@ tinyWeather is designed to be a lightweight weather app for Linux. It is extreme
 - Setup script both automates setting up, stopping, and removing the program
 
 Planned functionality:
-- Run on boot as well
 - Have optional notifications for certain types of weather (maybe a hurricane should be notified differently than a thunderstorm)
 - Make the process of changing icons easier 
 
 ## Getting Started
 Clone this repo wherever you'd like. To set up the program, run `bash setupTinyWeather.sh` or your shell equivalent from this repo. It will set up a systemd timer that gets a weather report once per day at midnight.\
-This script should be POSIX-compatible, but my experience is limited so if this program doesn't work on your shell, create an issue with details and I'll work on it!
+This script should be POSIX-compatible, but my experience is limited so if this program doesn't work on your shell, create an issue with details and I'll work on it!\
 
 ## Configuration
 To modify the icon being used in the notification, replace the default `weathericon.png` with another png of your choice. This png must also be named "weathericon.png", otherwise it won't be recognized.
