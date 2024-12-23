@@ -2,7 +2,7 @@
 Description=Python Weather Service
 After=network.target
 [Service]
-ExecStart=/usr/bin/python3 usr/local/bin/tinyWeather.py
+ExecStart=/usr/bin/python3 /usr/local/bin/tinyWeather.py
 Type=simple
 #User=nobody
 #Group=nogroup

@@ -7,8 +7,8 @@ then
 	sudo mv -t /usr/local/bin tinyWeather.py tinyWeatherDirectory
 	sudo mv -t /etc/systemd/user/ tinyWeather.service tinyWeather.timer
 	systemctl --user enable tinyWeather.service
-	systemctl --user daemon-reload && systemctl --user start tinyWeather.timer
-
+	systemctl --user start tinyWeather.timer
+	systemctl --user daemon-reload
 else
 	echo "You already setup tinyWeather. Do you want to
 a) change configuration
