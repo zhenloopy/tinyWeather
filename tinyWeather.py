@@ -32,11 +32,7 @@ def getWeatherData(url):
     with open('direct.temp', "r") as infile:
         fullPath = infile.readline().strip('\n')
 
-    desktopOutput = os.environ.get('DESKTOP_SESSION')
-    if (desktopOutput is not None):
-        run(split("env DISPLAY=:0 notify-send -i " + fullPath + "/weathericon.png \"Weather Alert\" " + message + " -u critical"), check=False, text=True)
-    else:
-        print("Weather Alert: " + message)
+    run(split("env DISPLAY=:0 notify-send -i " + fullPath + "/weathericon.png \"Weather Alert\" " + message + " -u critical"), check=False, text=True)
 
     os.remove('direct.temp')
 
